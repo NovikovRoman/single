@@ -16,7 +16,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to acquire exclusive app lock: %v", err)
 	}
-	defer func(s *Single) {
+	defer func(s *single.Single) {
         if err := s.TryUnlock(); err != nil {
             log.Fatal(err)
         }
