@@ -19,7 +19,7 @@ func New(name string) *Single {
 	return &Single{name: name}
 }
 
-// Lock tries to obtain an exclude lock on a lockfile and exits the program if an error occurs
+// Lock tries to obtain an excluded lock on a lockfile and exits the program if an error occurs
 func (s *Single) Lock() {
 	if _, err := s.CheckLock(); err != nil {
 		log.Fatal(err)

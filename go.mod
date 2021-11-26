@@ -1,3 +1,3 @@
 module github.com/NovikovRoman/single
 
-go 1.12
+go 1.17
