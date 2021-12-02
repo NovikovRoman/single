@@ -1,6 +1,5 @@
 [half fork from marcsauter/single](https://github.com/marcsauter/single)
 
-
 ```go
 package main
 
@@ -11,16 +10,22 @@ import (
 )
 
 func main() {
+	var (
+		busy bool
+		err  error
+	)
+
 	s := single.New("your-app-name")
-	busy, err := s.CheckLock()
+	busy, err = s.Lock()
 	if err != nil {
 		log.Fatalf("failed to acquire exclusive app lock: %v", err)
 	}
 	defer func(s *single.Single) {
-        if err := s.TryUnlock(); err != nil {
-            log.Fatal(err)
-        }
-    }(s)
+		if err = s.Unlock(); err != nil {
+			log.Fatal(err)
+		}
+	}(s)
+
 	if busy {
 		log.Fatal("another instance of the app is already running, exiting")
 	}
